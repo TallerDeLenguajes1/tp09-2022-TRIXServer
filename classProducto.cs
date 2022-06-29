@@ -2,7 +2,7 @@ using System.Text.Json;
 class producto
 {
     private string nombre;
-    private DateOnly fechaVencimiento;
+    private DateTime fechaVencimiento;
     private float precio;
     private string tamanio;
 
@@ -28,14 +28,14 @@ class producto
         };
 
         nombre = nombres[random.Next(nombres.Length)];
-        fechaVencimiento = new DateOnly(random.Next(2022, 2033), random.Next(1, 13), random.Next(1, 29));
+        fechaVencimiento = new DateTime(random.Next(2022, 2033), random.Next(1, 13), random.Next(1, 29));
         precio = random.Next(1000, 5001);
         tamanio = tamanios[random.Next(tamanios.Length)];
 
     }
     
     public string Nombre { get => nombre; set => nombre = value; }
-    public DateOnly FechaVencimiento { get => fechaVencimiento; set => fechaVencimiento = value; }
+    public DateTime FechaVencimiento { get => fechaVencimiento; set => fechaVencimiento = value; }
     public float Precio { get => precio; set => precio = value; }
     public string Tamanio { get => tamanio; set => tamanio = value; }
 }
@@ -44,7 +44,17 @@ class functions
 {
     public static void mostrarProductos(List<producto> dataListaProductos)
     {
-        
+        System.Console.WriteLine($"--\tProductos");
+        System.Console.WriteLine("--");
+        foreach (var item in dataListaProductos)
+        {
+            System.Console.WriteLine($"Producto: {item.Nombre}");
+            System.Console.WriteLine($"Vencimiento: {item.FechaVencimiento}");
+            System.Console.WriteLine($"Precio: ${item.Precio}");
+            System.Console.WriteLine($"Tamanio: {item.Tamanio}");
+            System.Console.WriteLine("--");
+
+        }
     }
 
     public static void escribirArchivo(string dataNombreArchivo, string dataListaProductosSerializada)

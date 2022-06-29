@@ -1,4 +1,6 @@
-﻿System.Console.Clear();
+﻿using System.Text.Json;
+
+System.Console.Clear();
 
 string nombreArchivo = "productos.json";
 var random = new Random();
@@ -11,4 +13,15 @@ System.Console.WriteLine("--");
 System.Console.WriteLine($"Cantidad de productos: \t{cantidad}");
 System.Console.WriteLine("--");
 
+functions.crearListaProductos(listaProductos, cantidad);
+
+string listaProductosSerializada = functions.serializar(listaProductos);
+
+functions.escribirArchivo(nombreArchivo, listaProductosSerializada);
+
+string contenidoArchivo = File.ReadAllText(nombreArchivo);
+
+var datosDeserializados = JsonSerializer.Deserialize<List<producto>>(contenidoArchivo);
+
+functions.mostrarProductos(datosDeserializados);
 
