@@ -1,3 +1,4 @@
+using System.Text.Json;
 class producto
 {
     private string nombre;
@@ -37,4 +38,37 @@ class producto
     public DateOnly FechaVencimiento { get => fechaVencimiento; set => fechaVencimiento = value; }
     public float Precio { get => precio; set => precio = value; }
     public string Tamanio { get => tamanio; set => tamanio = value; }
+}
+
+class functions
+{
+    public static void mostrarProductos(List<producto> dataListaProductos)
+    {
+        
+    }
+
+    public static void escribirArchivo(string dataNombreArchivo, string dataListaProductosSerializada)
+    {
+        var archivoWrite = new StreamWriter(File.Open(dataNombreArchivo, FileMode.Create));
+        archivoWrite.WriteLine(dataListaProductosSerializada);
+        archivoWrite.Close();
+
+    }
+
+    public static string serializar(List<producto> dataListaProductos)
+    {
+        string listaProductosSerializada = JsonSerializer.Serialize(dataListaProductos);
+        return listaProductosSerializada;
+
+    }
+
+    public static void crearListaProductos(List<producto> dataListaProductos, int dataCantidad)
+    {
+        for (int i = 0; i < dataCantidad; i++)
+        {
+            var producto = new producto();
+            dataListaProductos.Add(producto);
+
+        }
+    }
 }
